@@ -23,4 +23,32 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Land" parent="." index="1" instance=ExtResource( 1 )]
 
+[node name="DirectionalLight" type="DirectionalLight" parent="." index="2"]
+
+transform = Transform( 0.703688, -0.638553, 0.311567, 0, 0.438512, 0.898725, -0.710509, -0.632422, 0.308576, 20.7838, 7.73524, 0 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 0.27
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.5
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = false
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.1
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+directional_shadow_mode = 2
+directional_shadow_split_1 = 0.1
+directional_shadow_split_2 = 0.2
+directional_shadow_split_3 = 0.5
+directional_shadow_blend_splits = false
+directional_shadow_normal_bias = 0.8
+directional_shadow_bias_split_scale = 0.25
+directional_shadow_depth_range = 0
+directional_shadow_max_distance = 200.0
+_sections_unfolded = [ "Light" ]
+
 
