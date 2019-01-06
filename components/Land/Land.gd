@@ -9,7 +9,7 @@ var ActiveChunk = null
 
 
 func _ready():
-    var firstChunk = Chunk.create_new(self, null, null, null, Vector2(2,-3))
+    var firstChunk = Chunk.create_new(self, null, null, null, Vector2(0,0))
     add_child(firstChunk)
     self.set_active_chunk(firstChunk)
     pass
