@@ -1,7 +1,15 @@
 extends Node
 
-var Block = preload("res://components/Block/Block.tscn")
+# Scenes and Objects
+const Block = preload("res://components/Block/Block.tscn")
+const Chunk = preload("res://components/Land/Chunk.tscn")
 
+# Variables
+var neighourChunks = [[null, null, null],
+                      [null, null, null],
+                      [null, null, null]]
+
+# need to implement here chunk generation
 func generate_map():
     var map = []
     for i in range(10):
@@ -11,9 +19,14 @@ func generate_map():
         map.push_back(tmp)
     return map
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+
+# Creating new Chunk
+static func create_new(landScene, parentChunk, parentX, parentY):
+    var newChunk = Chunk.instance()
+    newChunk.add_neighbour(parentChunk, parentX, parentY)
+    landScene.add_child(newChunk)
+    return newChunk
+
 
 func _init():
     var map = generate_map()
@@ -22,10 +35,12 @@ func _init():
             put_blocks(Vector2(x,y), map[x][y])
     pass
 
+
 func _ready():
     # Called when the node is added to the scene for the first time.
     # Initialization here
     pass
+
 
 func put_blocks(pos, height):
     for h in range(height):
@@ -34,7 +49,11 @@ func put_blocks(pos, height):
         add_child(item)
     pass
 
-#func _process(delta):
-#    # Called every frame. Delta is time since last frame.
-#    # Update game logic here.
-#    pass
+
+# Helper methods
+func add_neighbour(chunk, x, y):
+    if(chunk != self && x != 1 && y != 1):
+        neighourChunks[x][y] = chunk
+    pass
+
+
