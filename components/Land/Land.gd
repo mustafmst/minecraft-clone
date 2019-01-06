@@ -1,15 +1,27 @@
 extends Node
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+# Scenes and Objects
+var Chunk = preload("res://components/Land/Chunk.tscn").instance()
+
+# Variables
+var PlayerPos = Vector2(0,0)
+var ActiveChunk = null
+
 
 func _ready():
-    # Called when the node is added to the scene for the first time.
-    # Initialization here
+    var firstChunk = Chunk.create_new(self, null, null, null, Vector2(2,-3))
+    add_child(firstChunk)
+    self.set_active_chunk(firstChunk)
     pass
 
-#func _process(delta):
-#    # Called every frame. Delta is time since last frame.
-#    # Update game logic here.
-#    pass
+
+func update_player_position(pos):
+    PlayerPos = pos
+    pass
+
+
+func set_active_chunk(chunk):
+    ActiveChunk = chunk
+    chunk.set_as_active()
+    pass
+
