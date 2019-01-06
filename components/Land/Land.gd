@@ -15,6 +15,10 @@ func _ready():
     pass
 
 
+func _process(delta):
+    print(get_child_count())
+
+
 func update_player_position(pos):
     PlayerPos = pos
     pass
@@ -23,5 +27,7 @@ func update_player_position(pos):
 func set_active_chunk(chunk):
     ActiveChunk = chunk
     chunk.create_neighbours()
+    chunk.update_relations()
+    chunk.second()
     pass
 

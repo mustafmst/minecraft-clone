@@ -69,10 +69,36 @@ func create_neighbours():
     pass
 
 
+func update_relations():
+    for i in range(neighourChunks.size()):
+        for j in range(neighourChunks[i].size()):
+            if neighourChunks[i][j] != self:
+                self.update_relations_for_chunk(neighourChunks[i][j], Vector2(1,1)-Vector2(i,j))
+    pass
+
+
+func update_relations_for_chunk(chunk, relationVec):
+    for i in range(neighourChunks.size()):
+        for j in range(neighourChunks[i].size()):
+            if neighourChunks[i][j] != self && neighourChunks[i][j] != chunk:
+                var relation = Vector2(i,j)+relationVec
+                if relation.x > -1 && relation.x < 3  && relation.y > -1 && relation.y < 3:
+                    chunk.add_neighbour(neighourChunks[i][j], relation.x, relation.y)
+    pass
+
+
 func check_if_chunk_exist_and_create(nX, nY):
     var chunkPos = self.get_2d_pos()
     if(neighourChunks[nX][nY] == null):
         neighourChunks[nX][nY] = self.create_new(get_parent(), self, 2-nX, 2-nY, Vector2(chunkPos.x+nX-1,chunkPos.y+nY-1))
+    pass
+    
+    
+func second():
+    for i in range(neighourChunks.size()):
+        for j in range(neighourChunks[i].size()):
+            neighourChunks[i][j].create_neighbours()
+            neighourChunks[i][j].update_relations()
     pass
 
 
