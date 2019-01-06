@@ -21,7 +21,7 @@ near = 0.05
 far = 100.0
 _sections_unfolded = [ "Transform" ]
 
-[node name="Land" parent="." index="1" instance=ExtResource( 1 )]
+[node name="Chunk" parent="." index="1" instance=ExtResource( 1 )]
 
 [node name="DirectionalLight" type="DirectionalLight" parent="." index="2"]
 
