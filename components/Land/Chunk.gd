@@ -47,7 +47,7 @@ func put_blocks(pos, height):
     var chunkPos = self.get_2d_pos()
     for h in range(height):
         var item = Block.instance()
-        item.translate(Vector3((chunkPos.x*ChunkSize)+pos.x, h, (chunkPos.y*ChunkSize)+pos.y))
+        item.translate(Vector3((chunkPos.x*(ChunkSize-1))+pos.x, h, (chunkPos.y*(ChunkSize-1))+pos.y))
         add_child(item)
     pass
 
@@ -62,15 +62,17 @@ func add_neighbour(chunk, x, y):
     pass
 
 
-func set_as_active():
-    self.check_if_chunk_exist_and_create(2,0)
+func create_neighbours():
+    for i in range(neighourChunks.size()):
+        for j in range(neighourChunks[i].size()):
+            self.check_if_chunk_exist_and_create(i,j)
     pass
 
 
 func check_if_chunk_exist_and_create(nX, nY):
     var chunkPos = self.get_2d_pos()
     if(neighourChunks[nX][nY] == null):
-        self.create_new(get_parent(), self, 2-nX, 2-nY, Vector2(chunkPos.x+nX-1,chunkPos.y+nY-1))
+        neighourChunks[nX][nY] = self.create_new(get_parent(), self, 2-nX, 2-nY, Vector2(chunkPos.x+nX-1,chunkPos.y+nY-1))
     pass
 
 

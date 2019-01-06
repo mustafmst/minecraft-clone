@@ -22,6 +22,6 @@ func update_player_position(pos):
 
 func set_active_chunk(chunk):
     ActiveChunk = chunk
-    chunk.set_as_active()
+    chunk.create_neighbours()
     pass
 
