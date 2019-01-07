@@ -5,6 +5,6 @@
 [node name="Chunk" type="Spatial"]
 
 script = ExtResource( 1 )
-maxBlockHeight = 1
+maxBlockHeight = 4
 
 

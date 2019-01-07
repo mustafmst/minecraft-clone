@@ -7,7 +7,7 @@ const Block = preload("res://components/Block/Block.tscn")
 const Chunk = preload("res://components/Land/Chunk.tscn")
 
 # Variables
-const ChunkSize = 10
+const ChunkSize = 16
 var neighourChunks = [[null, null, null],
                       [null, null, null],
                       [null, null, null]]
@@ -47,7 +47,7 @@ func put_blocks(pos, height):
     var chunkPos = self.get_2d_pos()
     for h in range(height):
         var item = Block.instance()
-        item.translate(Vector3((chunkPos.x*(ChunkSize-1))+pos.x, h, (chunkPos.y*(ChunkSize-1))+pos.y))
+        item.translate(Vector3(chunkPos.x+pos.x-ChunkSize/2, h, chunkPos.y+pos.y-ChunkSize/2))
         add_child(item)
     pass
 
@@ -90,7 +90,7 @@ func update_relations_for_chunk(chunk, relationVec):
 func check_if_chunk_exist_and_create(nX, nY):
     var chunkPos = self.get_2d_pos()
     if(neighourChunks[nX][nY] == null):
-        neighourChunks[nX][nY] = self.create_new(get_parent(), self, 2-nX, 2-nY, Vector2(chunkPos.x+nX-1,chunkPos.y+nY-1))
+        neighourChunks[nX][nY] = self.create_new(get_parent(), self, 2-nX, 2-nY, Vector2(chunkPos.x+((nX-1)*ChunkSize/2),chunkPos.y+((nY-1)*ChunkSize/2)))
     pass
     
     
@@ -107,5 +107,27 @@ func create_map():
     for x in range(map.size()):
         for y in range(map[x].size()):
             put_blocks(Vector2(x,y), map[x][y])
+    pass
+
+
+func activate():
+    self.set_process(true)
+    self.show()
+    for i in range(neighourChunks.size()):
+        for j in range(neighourChunks[i].size()):
+            if neighourChunks[i][j] != null:
+                neighourChunks[i][j].set_process(true)
+                neighourChunks[i][j].show()
+    pass
+
+
+func deactivate():
+    for i in range(neighourChunks.size()):
+        for j in range(neighourChunks[i].size()):
+            if neighourChunks[i][j] != null:
+                neighourChunks[i][j].set_process(false)
+                neighourChunks[i][j].hide()
+    self.set_process(false)
+    self.hide()
     pass
 
