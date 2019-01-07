@@ -12,20 +12,11 @@ var neighourChunks = [[null, null, null],
                       [null, null, null],
                       [null, null, null]]
 
-# need to implement here chunk generation
-func generate_map():
-    var map = []
-    for i in range(ChunkSize):
-        var tmp = []
-        for j in range(ChunkSize):
-            tmp.push_back(randi()%(maxBlockHeight)+1)
-        map.push_back(tmp)
-    return map
-
 
 # Creating new Chunk
 static func create_new(landScene, parentChunk, parentX, parentY, pos):
     var newChunk = Chunk.instance()
+    landScene.add_child(newChunk)
     newChunk.translate(Vector3(pos.x, 0, pos.y))
     newChunk.create_map()
     if parentChunk != null:
@@ -43,11 +34,12 @@ func _ready():
     pass
 
 
-func put_blocks(pos, height):
+func put_blocks(pos):
     var chunkPos = self.get_2d_pos()
-    for h in range(height):
+    var blockPos = Vector2(chunkPos.x+pos.x-ChunkSize/2, chunkPos.y+pos.y-ChunkSize/2)
+    for h in range(get_parent().mapGenerator.get_height(blockPos)):
         var item = Block.instance()
-        item.translate(Vector3(chunkPos.x+pos.x-ChunkSize/2, h, chunkPos.y+pos.y-ChunkSize/2))
+        item.translate(Vector3(blockPos.x,h,blockPos.y))
         add_child(item)
     pass
 
@@ -103,10 +95,9 @@ func second():
 
 
 func create_map():
-    var map = generate_map()
-    for x in range(map.size()):
-        for y in range(map[x].size()):
-            put_blocks(Vector2(x,y), map[x][y])
+    for x in range(ChunkSize):
+        for y in range(ChunkSize):
+            put_blocks(Vector2(x,y))
     pass
 
 

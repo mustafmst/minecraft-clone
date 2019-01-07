@@ -4,13 +4,16 @@ extends Node
 var Chunk = preload("res://components/Land/Chunk.tscn").instance()
 
 # Variables
+var mapGenerator
 var PlayerPos = Vector2(0,0)
 var ActiveChunk = null
 var firstChunk
 
 func _ready():
+    mapGenerator = get_node("MapGenerator")
+    mapGenerator.generate_map(Vector2(1080,1080),4,1,0)
+    
     firstChunk = Chunk.create_new(self, null, null, null, Vector2(0,0))
-    add_child(firstChunk)
     self.set_active_chunk(firstChunk)
     pass
 
