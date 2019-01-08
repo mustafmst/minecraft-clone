@@ -6,31 +6,46 @@ const Chunk = preload("res://components/Land/Chunk.tscn")
 
 # Variables
 var mapGenerator
-var PlayerPos = Vector2(0,0)
 var ActiveChunk = null
 var firstChunk
 
 func _ready():
     mapGenerator = get_node("MapGenerator")
-    mapGenerator.generate_map(Vector2(1080,1080),10,5,0)
+    mapGenerator.generate_map(Vector2(1080,1080),5,1,0)
     
     firstChunk = Chunk.instance().create_new(self, null, null, null, Vector2(0,0))
     self.set_active_chunk(firstChunk)
+    #Debug
+    print(ActiveChunk.get_2d_pos())
+    for i in range(ActiveChunk.neighourChunks.size()):
+        for j in range(ActiveChunk.neighourChunks[i].size()):
+            var c = ActiveChunk.neighourChunks[i][j]
+            print(c.get_2d_pos())
     pass
 
 
 func _process(delta):
-    if Input.is_action_just_pressed("ui_up"):
-        if ActiveChunk == null:
-            set_active_chunk(firstChunk)
-        else:
-            set_unactive_chunk(firstChunk)
+    var playerPos = get_parent().get_node("Player").translation
+    var nearestChunk = get_nearest_chunk(Vector2(playerPos.x, playerPos.z))
+    if nearestChunk != ActiveChunk:
+        print("Player", Vector2(playerPos.x, playerPos.z))
+        print("Chunk", nearestChunk.get_2d_pos())
+        set_unactive_chunk(ActiveChunk)
+        set_active_chunk(nearestChunk)
     pass
 
 
-func update_player_position(pos):
-    PlayerPos = pos
-    pass
+func get_nearest_chunk(pos):
+    var nearestChunk = ActiveChunk
+    var distance = pos.distance_to(nearestChunk.get_2d_pos())
+    for i in range(ActiveChunk.neighourChunks.size()):
+        for j in range(ActiveChunk.neighourChunks[i].size()):
+            var c = ActiveChunk.neighourChunks[i][j]
+            var newDistance = pos.distance_to(c.get_2d_pos())
+            if  newDistance < distance :
+                nearestChunk = c
+                distance = newDistance
+    return nearestChunk
 
 
 func set_unactive_chunk(chunk):

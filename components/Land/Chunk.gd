@@ -31,8 +31,8 @@ func _ready():
 
 
 func put_blocks(pos):
-    var chunkPos = self.get_2d_pos()
-    var blockPos = Vector2(chunkPos.x+pos.x-ChunkSize/2, chunkPos.y+pos.y-ChunkSize/2)
+    var chunkPos = self.translation
+    var blockPos = Vector2(chunkPos.x+pos.x-ChunkSize/2, chunkPos.z+pos.y-ChunkSize/2)
     for h in range(get_parent().mapGenerator.get_height(blockPos)):
         var item = get_parent().Block.instance()
         item.translate(Vector3(blockPos.x,h,blockPos.y))
@@ -42,7 +42,7 @@ func put_blocks(pos):
 
 # Helper methods
 func get_2d_pos():
-    return Vector2(self.translation.x, self.translation.z)
+    return Vector2(self.translation.x*2, self.translation.z*2)
 
 
 func add_neighbour(chunk, x, y):
@@ -78,7 +78,7 @@ func update_relations_for_chunk(chunk, relationVec):
 func check_if_chunk_exist_and_create(nX, nY):
     var chunkPos = self.get_2d_pos()
     if(neighourChunks[nX][nY] == null):
-        neighourChunks[nX][nY] = self.create_new(get_parent(), self, 2-nX, 2-nY, Vector2(chunkPos.x+((nX-1)*ChunkSize/2),chunkPos.y+((nY-1)*ChunkSize/2)))
+        neighourChunks[nX][nY] = self.create_new(get_parent(), self, 2-nX, 2-nY, Vector2(chunkPos.x/2+((nX-1)*ChunkSize/2),chunkPos.y/2+((nY-1)*ChunkSize/2)))
     pass
     
     
