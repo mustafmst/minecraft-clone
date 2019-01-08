@@ -60,7 +60,7 @@ func create_neighbours():
 func update_relations():
     for i in range(neighourChunks.size()):
         for j in range(neighourChunks[i].size()):
-            if neighourChunks[i][j] != self:
+            if neighourChunks[i][j] != self && neighourChunks[i][j] != null:
                 self.update_relations_for_chunk(neighourChunks[i][j], Vector2(1,1)-Vector2(i,j))
     pass
 

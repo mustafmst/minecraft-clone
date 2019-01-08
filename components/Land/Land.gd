@@ -11,7 +11,7 @@ var firstChunk
 
 func _ready():
     mapGenerator = get_node("MapGenerator")
-    mapGenerator.generate_map(Vector2(1080,1080),5,1,0)
+    mapGenerator.generate_map(Vector2(1080,1080),2,1,0)
     
     firstChunk = Chunk.instance().create_new(self, null, null, null, Vector2(0,0))
     self.set_active_chunk(firstChunk)
