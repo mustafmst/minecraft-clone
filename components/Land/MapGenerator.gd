@@ -5,6 +5,7 @@ var mapSize = null
 var map = null
 
 func generate_map(size, maxHeight, minHeight, windowSize):
+    randomize()
     mapSize = size
     var tmpMap = []
     for i in range(size.x):

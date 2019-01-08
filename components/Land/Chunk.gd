@@ -2,9 +2,6 @@ extends Spatial
 
 export(int) var maxBlockHeight = 1
 
-# Scenes and Objects
-const Block = preload("res://components/Block/Block.tscn")
-const Chunk = preload("res://components/Land/Chunk.tscn")
 
 # Variables
 const ChunkSize = 16
@@ -15,13 +12,12 @@ var neighourChunks = [[null, null, null],
 
 # Creating new Chunk
 static func create_new(landScene, parentChunk, parentX, parentY, pos):
-    var newChunk = Chunk.instance()
+    var newChunk = landScene.Chunk.instance()
     landScene.add_child(newChunk)
     newChunk.translate(Vector3(pos.x, 0, pos.y))
     newChunk.create_map()
     if parentChunk != null:
         newChunk.add_neighbour(parentChunk, parentX, parentY)
-    landScene.add_child(newChunk)
     return newChunk
 
 
@@ -38,7 +34,7 @@ func put_blocks(pos):
     var chunkPos = self.get_2d_pos()
     var blockPos = Vector2(chunkPos.x+pos.x-ChunkSize/2, chunkPos.y+pos.y-ChunkSize/2)
     for h in range(get_parent().mapGenerator.get_height(blockPos)):
-        var item = Block.instance()
+        var item = get_parent().Block.instance()
         item.translate(Vector3(blockPos.x,h,blockPos.y))
         add_child(item)
     pass

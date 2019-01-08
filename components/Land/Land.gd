@@ -1,7 +1,8 @@
 extends Node
 
 # Scenes and Objects
-var Chunk = preload("res://components/Land/Chunk.tscn").instance()
+const Block = preload("res://components/Block/Block.tscn")
+const Chunk = preload("res://components/Land/Chunk.tscn")
 
 # Variables
 var mapGenerator
@@ -11,9 +12,9 @@ var firstChunk
 
 func _ready():
     mapGenerator = get_node("MapGenerator")
-    mapGenerator.generate_map(Vector2(1080,1080),4,1,0)
+    mapGenerator.generate_map(Vector2(1080,1080),10,5,0)
     
-    firstChunk = Chunk.create_new(self, null, null, null, Vector2(0,0))
+    firstChunk = Chunk.instance().create_new(self, null, null, null, Vector2(0,0))
     self.set_active_chunk(firstChunk)
     pass
 
