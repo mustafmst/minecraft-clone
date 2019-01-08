@@ -12,7 +12,7 @@ var thread = null
 
 func _ready():
     mapGenerator = get_node("MapGenerator")
-    mapGenerator.generate_map(Vector2(1080,1080),2,1,0)
+    mapGenerator.generate_map(Vector2(1080,1080),5,1,0)
     
     firstChunk = Chunk.instance().create_new(self, null, null, null, Vector2(0,0))
     self.set_active_chunk(firstChunk)
@@ -29,8 +29,10 @@ func _process(delta):
     if nearestChunk != ActiveChunk:
         var lastChunk = ActiveChunk
         ActiveChunk = null
-        #thread = Thread.new()
-        #thread.start(self, "change_chunk", [nearestChunk, lastChunk])
+#        if thread != null && thread.is_active():
+#            thread.wait_to_finish()
+#        thread = Thread.new()
+#        thread.start(self, "change_chunk", [nearestChunk, lastChunk])
         change_chunk([nearestChunk,lastChunk])
     pass
     

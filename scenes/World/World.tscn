@@ -36,6 +36,6 @@ directional_shadow_max_distance = 200.0
 
 [node name="Player" parent="." index="2" instance=ExtResource( 2 )]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0 )
 
 
