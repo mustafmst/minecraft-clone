@@ -8,6 +8,7 @@ const Chunk = preload("res://components/Land/Chunk.tscn")
 var mapGenerator
 var ActiveChunk = null
 var firstChunk
+var thread = null
 
 func _ready():
     mapGenerator = get_node("MapGenerator")
@@ -15,8 +16,6 @@ func _ready():
     
     firstChunk = Chunk.instance().create_new(self, null, null, null, Vector2(0,0))
     self.set_active_chunk(firstChunk)
-    #Debug
-    print(ActiveChunk.get_2d_pos())
     for i in range(ActiveChunk.neighourChunks.size()):
         for j in range(ActiveChunk.neighourChunks[i].size()):
             var c = ActiveChunk.neighourChunks[i][j]
@@ -28,11 +27,18 @@ func _process(delta):
     var playerPos = get_parent().get_node("Player").translation
     var nearestChunk = get_nearest_chunk(Vector2(playerPos.x, playerPos.z))
     if nearestChunk != ActiveChunk:
-        print("Player", Vector2(playerPos.x, playerPos.z))
-        print("Chunk", nearestChunk.get_2d_pos())
-        set_unactive_chunk(ActiveChunk)
-        set_active_chunk(nearestChunk)
+        var lastChunk = ActiveChunk
+        ActiveChunk = null
+        #thread = Thread.new()
+        #thread.start(self, "change_chunk", [nearestChunk, lastChunk])
+        change_chunk([nearestChunk,lastChunk])
     pass
+    
+func change_chunk(chunks):
+    set_unactive_chunk(chunks[1])
+    set_active_chunk(chunks[0])
+    pass
+    
 
 
 func get_nearest_chunk(pos):
@@ -41,17 +47,15 @@ func get_nearest_chunk(pos):
     for i in range(ActiveChunk.neighourChunks.size()):
         for j in range(ActiveChunk.neighourChunks[i].size()):
             var c = ActiveChunk.neighourChunks[i][j]
-            var newDistance = pos.distance_to(c.get_2d_pos())
-            if  newDistance < distance :
-                nearestChunk = c
-                distance = newDistance
+            if c != null:
+                var newDistance = pos.distance_to(c.get_2d_pos())
+                if  newDistance < distance :
+                    nearestChunk = c
+                    distance = newDistance
     return nearestChunk
 
 
 func set_unactive_chunk(chunk):
-    ActiveChunk = null
-    chunk.create_neighbours()
-    chunk.update_relations()
     chunk.deactivate()
     pass
 
