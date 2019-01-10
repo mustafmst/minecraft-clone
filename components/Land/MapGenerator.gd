@@ -7,15 +7,26 @@ var map = null
 var last_generated_number = 1
 
 func get_new_height(last_height, down, up):
-    
+    var new = last_height + (randi()%3-1)
+    if new > up :
+        return up
+    elif new < down :
+        return down
+    return new
 
 func new_map_generation(size, down, up):
     var lastXY = 0
     var lastZY = 0
     var new_map = []
     for i in range(size.x):
-        var line = []
-    
+        lastXY = get_new_height(lastXY, down, up)
+        lastZY = lastXY
+        var line = [lastXY]
+        for j in range(size.y-1):
+            var new = get_new_height(lastZY, down, up)
+            line.append(new)
+        new_map.append(line)
+    map = new_map    
     pass
 
 
