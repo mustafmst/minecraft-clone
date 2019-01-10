@@ -1,10 +1,6 @@
 extends Node
 
-var mapSize = null
-
 var map = null
-
-var last_generated_number = 1
 
 func get_new_height(last_height, down, up):
     var new = last_height + (randi()%3-1)
@@ -26,22 +22,10 @@ func new_map_generation(size, down, up):
         for j in range(size.y-1):
             var new = get_new_height(lastZY, down, up)
             line.append(new)
+            lastZY = new
         new_map.append(line)
     map = new_map    
     pass
-
-
-func get_random(up,down):
-    var option = randi()%99
-    if option < 33:
-        last_generated_number += 1
-    elif option >= 33 && option < 66 :
-        last_generated_number -= 1
-    if last_generated_number < down:
-        last_generated_number = down
-    elif last_generated_number > up:
-        last_generated_number = up
-    return last_generated_number
 
 
 func generate_map(size, up, down, mask):
@@ -62,8 +46,8 @@ func filter_map(mask):
                 for j in range(-1,1):
                     sum = sum + (map[x+i][y+j] * mask[i+1][j+1])
             var h = int(sum/mask_sum)
-#            if h < 1 :
-#                h = 1
+            if h < 1 :
+                h = 1
             line.append(h)
         new_map.append(line)
     map = new_map
@@ -76,18 +60,6 @@ func get_mask_sum(mask):
         for j in range(mask[i].size()):
             res = res + mask[i][j]
     return res
-
-
-func get_avg(windowSize, x, y):
-    var sum = 0
-    var num = 0
-    for i in range(-windowSize, windowSize-1):
-        for j in range(-windowSize, windowSize-1):
-            num += 1
-            sum += map[i][j]
-    print(sum, num)
-    return int(sum/num)        
-    pass
 
 
 func get_height(point):
