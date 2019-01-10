@@ -19,6 +19,7 @@ func new_map_generation(size, down, up):
     var lastZY = 0
     var new_map = []
     for i in range(size.x):
+        randomize()
         lastXY = get_new_height(lastXY, down, up)
         lastZY = lastXY
         var line = [lastXY]
@@ -43,31 +44,38 @@ func get_random(up,down):
     return last_generated_number
 
 
-func generate_map(size, maxHeight, minHeight, windowSize):
+func generate_map(size, up, down, mask):
     randomize()
-    mapSize = size
-    var tmpMap = []
-    for i in range(size.x):
-        var mapLine = []
-        for j in range(size.y):
-             mapLine.append(get_random(maxHeight, minHeight))
-        tmpMap.append(mapLine)
-    map = tmpMap
-    print(map)
-#    filter_map(windowSize)
+    new_map_generation(size, down, up)
+    filter_map(mask)
     pass
 
 
-func filter_map(windowSize):
-    var newMap = []
-    for i in range(windowSize, map.size()-windowSize):
+func filter_map(mask):
+    var mask_sum = get_mask_sum(mask)
+    var new_map = []
+    for x in range(1,map.size()-1):
         var line = []
-        for j in range(windowSize, map[i].size()-windowSize):
-            line.append(get_avg(windowSize, i, j))
-        newMap.append(line)
-    map = newMap
-    print(map)     
+        for y in range(1,map[x].size()-1):
+            var sum = 0
+            for i in range(-1,1):
+                for j in range(-1,1):
+                    sum = sum + (map[x+i][y+j] * mask[i+1][j+1])
+            var h = int(sum/mask_sum)
+#            if h < 1 :
+#                h = 1
+            line.append(h)
+        new_map.append(line)
+    map = new_map
     pass
+
+
+func get_mask_sum(mask):
+    var res = 0
+    for i in range(mask.size()):
+        for j in range(mask[i].size()):
+            res = res + mask[i][j]
+    return res
 
 
 func get_avg(windowSize, x, y):
@@ -83,8 +91,8 @@ func get_avg(windowSize, x, y):
 
 
 func get_height(point):
-    var x = int(point.x)+int(mapSize.x/2)
-    var y = int(point.y)+int(mapSize.y/2)
+    var x = int(point.x)+int(map.size()/2)
+    var y = int(point.y)+int(map[0].size()/2)
     if x > -1 && x < map.size() && y > -1 && y < map[x].size():
         return map[x][y]
     else:

@@ -4,6 +4,12 @@ extends Node
 const Block = preload("res://components/Block/Block.tscn")
 const Chunk = preload("res://components/Land/Chunk.tscn")
 
+const mask = [
+    [1,1,1],
+    [1,9,1],
+    [1,1,1]
+]
+
 # Variables
 var mapGenerator
 var ActiveChunk = null
@@ -12,7 +18,7 @@ var thread = null
 
 func _ready():
     mapGenerator = get_node("MapGenerator")
-    mapGenerator.generate_map(Vector2(32,32),5,0,1)
+    mapGenerator.generate_map(Vector2(200,200),5,1,mask)
     
     firstChunk = Chunk.instance().create_new(self, null, null, null, Vector2(0,0))
     self.set_active_chunk(firstChunk)
