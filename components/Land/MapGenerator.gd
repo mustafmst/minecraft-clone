@@ -6,6 +6,19 @@ var map = null
 
 var last_generated_number = 1
 
+func get_new_height(last_height, down, up):
+    
+
+func new_map_generation(size, down, up):
+    var lastXY = 0
+    var lastZY = 0
+    var new_map = []
+    for i in range(size.x):
+        var line = []
+    
+    pass
+
+
 func get_random(up,down):
     var option = randi()%99
     if option < 33:
