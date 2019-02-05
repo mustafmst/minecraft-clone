@@ -81,14 +81,14 @@ ground_horizon_color = Color( 0.482353, 0.788235, 0.952941, 1 )
 ground_curve = 0.01
 ground_energy = 1.0
 sun_color = Color( 0.556863, 0.823529, 0.909804, 1 )
-sun_latitude = -20.0
+sun_latitude = 0.0
 sun_longitude = 0.0
 sun_angle_min = 0.0
 sun_angle_max = 0.0
-sun_curve = 0.05
+sun_curve = 0.0026278
 sun_energy = 0.0
 texture_size = 0
-_sections_unfolded = [ "Sky", "Sun", "Texture" ]
+_sections_unfolded = [ "Ground", "Sky", "Sun", "Texture" ]
 
 [sub_resource type="Environment" id=4]
 
@@ -242,7 +242,6 @@ _sections_unfolded = [ "Pause", "Transform", "Visibility" ]
 
 [node name="sun" type="DirectionalLight" parent="sun_mover" index="0"]
 
-editor/display_folded = true
 transform = Transform( -0.0119718, 0, -0.999928, 0, 1, 0, 0.999928, 0, -0.0119718, -47, 0, 0 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
@@ -323,7 +322,6 @@ environment = SubResource( 4 )
 
 [node name="moon_mover" type="Position3D" parent="." index="1"]
 
-editor/display_folded = true
 script = ExtResource( 2 )
 _sections_unfolded = [ "Pause", "Transform", "Visibility" ]
 

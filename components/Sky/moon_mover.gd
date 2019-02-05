@@ -1,7 +1,7 @@
 extends Position3D
 
-#var speed = 0.001388889 # 1h in game world = 1 minute in real
-var speed = 0.2
+var speed = 0.001388889 # 1h in game world = 1 minute in real
+#var speed = 0.2 # test speed
 
 onready var moon = get_node("moon")
 
@@ -17,7 +17,7 @@ func _physics_process(delta):
             Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
     var new_moon_rotation = get_rotation()
-    new_moon_rotation.z += (PI * speed) * delta
+    new_moon_rotation.z -= (PI * speed) * delta
 
     if(new_moon_rotation.z > 2 * PI):
         new_moon_rotation.z -= 2 * PI
