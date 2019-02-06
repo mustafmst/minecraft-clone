@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://components/Sky/sun_mover.gd" type="Script" id=1]
-[ext_resource path="res://components/Sky/moon_mover.gd" type="Script" id=2]
+[ext_resource path="res://components/Sky/SkyObjectsMover.gd" type="Script" id=1]
 
 [sub_resource type="SphereMesh" id=1]
 
@@ -235,12 +234,17 @@ _sections_unfolded = [ "Albedo", "Emission", "Flags", "NormalMap", "Parameters",
 
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="sun_mover" type="Position3D" parent="." index="0"]
+[node name="SkyObjectsMover" type="Position3D" parent="." index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Pause", "Transform", "Visibility" ]
+speed = 0.00138889
+start_sky_energy = 0.75
+dusk_angle = 0.523599
+day_brightness_speed_factor = 2
+night_brightness_speed_factor = 2.5
 
-[node name="sun" type="DirectionalLight" parent="sun_mover" index="0"]
+[node name="sun" type="DirectionalLight" parent="SkyObjectsMover" index="0"]
 
 transform = Transform( -0.0119718, 0, -0.999928, 0, 1, 0, 0.999928, 0, -0.0119718, -47, 0, 0 )
 layers = 1
@@ -268,7 +272,7 @@ directional_shadow_depth_range = 0
 directional_shadow_max_distance = 200.0
 _sections_unfolded = [ "Directional Shadow", "Editor", "Light", "Shadow", "Transform", "Visibility" ]
 
-[node name="Sprite3D" type="Sprite3D" parent="sun_mover/sun" index="0"]
+[node name="Sprite3D" type="Sprite3D" parent="SkyObjectsMover/sun" index="0"]
 
 layers = 1
 material_override = null
@@ -299,7 +303,7 @@ region_enabled = false
 region_rect = Rect2( 0, 0, 0, 0 )
 _sections_unfolded = [ "Animation", "Flags", "Geometry", "LOD", "Region", "Transform", "Visibility" ]
 
-[node name="MeshInstance" type="MeshInstance" parent="sun_mover/sun/Sprite3D" index="0"]
+[node name="MeshInstance" type="MeshInstance" parent="SkyObjectsMover/sun/Sprite3D" index="0"]
 
 transform = Transform( 1, 0, -1.86265e-09, 0, 1, 0, 1.86265e-09, 0, 1, -1.49012e-08, 0, 0 )
 layers = 1
@@ -316,16 +320,7 @@ skeleton = NodePath("..")
 material/0 = SubResource( 2 )
 _sections_unfolded = [ "Geometry", "LOD", "Pause", "Transform", "Visibility", "material" ]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="sun_mover" index="1"]
-
-environment = SubResource( 4 )
-
-[node name="moon_mover" type="Position3D" parent="." index="1"]
-
-script = ExtResource( 2 )
-_sections_unfolded = [ "Pause", "Transform", "Visibility" ]
-
-[node name="moon" type="DirectionalLight" parent="moon_mover" index="0"]
+[node name="moon" type="DirectionalLight" parent="SkyObjectsMover" index="1"]
 
 transform = Transform( 1.62921e-07, 5.30863e-14, 1, 3.25841e-07, -1, 0, 1, 3.25841e-07, -1.62921e-07, 19.9999, 0.00850821, -0.00167274 )
 layers = 1
@@ -353,7 +348,7 @@ directional_shadow_depth_range = 0
 directional_shadow_max_distance = 200.0
 _sections_unfolded = [ "Directional Shadow", "Editor", "Light", "Pause", "Shadow", "Transform", "Visibility" ]
 
-[node name="Sprite3D" type="Sprite3D" parent="moon_mover/moon" index="0"]
+[node name="Sprite3D" type="Sprite3D" parent="SkyObjectsMover/moon" index="0"]
 
 layers = 1
 material_override = null
@@ -384,7 +379,7 @@ region_enabled = false
 region_rect = Rect2( 0, 0, 0, 0 )
 _sections_unfolded = [ "Animation", "Flags", "Geometry", "LOD", "Region", "Transform", "Visibility" ]
 
-[node name="MeshInstance" type="MeshInstance" parent="moon_mover/moon/Sprite3D" index="0"]
+[node name="MeshInstance" type="MeshInstance" parent="SkyObjectsMover/moon/Sprite3D" index="0"]
 
 transform = Transform( 1, 0, -2.79397e-09, 0, 1, 0, 2.79397e-09, 0, 1, 0, 0, 0 )
 layers = 1
@@ -401,7 +396,11 @@ skeleton = NodePath("..")
 material/0 = SubResource( 2 )
 _sections_unfolded = [ "Geometry", "LOD", "Pause", "Transform", "Visibility", "material" ]
 
-[node name="Camera" type="Camera" parent="." index="2"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SkyObjectsMover" index="2"]
+
+environment = SubResource( 4 )
+
+[node name="Camera" type="Camera" parent="." index="1"]
 
 transform = Transform( 0.999776, 0.0194449, 0.00842238, -0.0191688, 0.999314, -0.0316994, -0.00903313, 0.0315309, 0.999462, 2.39405, 6.31808, 51.2283 )
 keep_aspect = 1
@@ -418,7 +417,7 @@ near = 0.05
 far = 100.0
 _sections_unfolded = [ "Pause", "Transform", "Visibility" ]
 
-[node name="testbody" type="Sprite3D" parent="." index="3"]
+[node name="testbody" type="Sprite3D" parent="." index="2"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0 )
 layers = 1
