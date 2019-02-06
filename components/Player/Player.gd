@@ -1,12 +1,17 @@
 extends KinematicBody
 
-const GRAVITY = -24.8
+# https://minecraft.gamepedia.com/Transportation
+# There is no 'real' physisc in minecraft
+# https://www.minecraftforum.net/forums/minecraft-java-edition/discussion/132990-rebuttal-acceleration-of-gravity-in-minecraft
+# We do not even try to reimplement it...
+# The constants regarding the acceleration and gravity are experimental 
+const GRAVITY = -20
 var vel = Vector3()
-const MAX_SPEED = 20
-const JUMP_SPEED = 18
-const ACCEL= 4.5
-const MAX_SPRINT_SPEED = 30
-const SPRINT_ACCEL = 18
+const MAX_SPEED = 4.317
+const JUMP_SPEED = 7
+const ACCEL= 4
+const MAX_SPRINT_SPEED =  5.612
+const SPRINT_ACCEL = 6
 var is_sprinting = false
 
 var dir = Vector3()
@@ -18,6 +23,10 @@ onready var camera = $RotationHelper/Camera
 onready var rotation_helper = $RotationHelper
 
 var MOUSE_SENSITIVITY = 0.05
+
+# https://minecraft.gamepedia.com/Player
+# The player is 1.8 blocks tall, 1.65 blocks tall when sneaking,
+# 0.6 blocks tall when gliding/sprint-swimming and 0.6 blocks wide.
 
 func _ready():
     # Cature the mouse cursor in game window 

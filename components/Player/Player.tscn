@@ -4,20 +4,20 @@
 
 [sub_resource type="BoxShape" id=1]
 
-extents = Vector3( 0.9, 1.9, 0.9 )
+extents = Vector3( 0.3, 0.8, 0.3 )
 _sections_unfolded = [ "Resource" ]
 
 [sub_resource type="CapsuleMesh" id=2]
 
 custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
-radius = 1.0
-mid_height = 1.0
-radial_segments = 64
+radius = 0.3
+mid_height = 0.9
+radial_segments = 20
 rings = 8
+_sections_unfolded = [ "Resource" ]
 
 [node name="Player" type="KinematicBody" index="0"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.96863, 0 )
 input_ray_pickable = true
 input_capture_on_drag = false
 collision_layer = 1
@@ -34,17 +34,18 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape" type="CollisionShape" parent="." index="0"]
 
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.754574, 0 )
 shape = SubResource( 1 )
 disabled = false
-_sections_unfolded = [ "Transform", "Visibility" ]
+_sections_unfolded = [ "Pause", "Transform", "Visibility" ]
 
 [node name="RotationHelper" type="Spatial" parent="." index="1"]
 
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="Camera" type="Camera" parent="RotationHelper" index="0"]
 
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 1.8, 0 )
+transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0, 1.62, 0 )
 keep_aspect = 1
 cull_mask = 1048575
 environment = null
@@ -57,11 +58,11 @@ fov = 70.0
 size = 1.0
 near = 0.05
 far = 100.0
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="MeshInstance" type="MeshInstance" parent="RotationHelper" index="1"]
 
-transform = Transform( 1, 0, 5.30863e-14, 5.30863e-14, 1.62921e-07, -1, 0, 1, 1.62921e-07, 0, 0, 0 )
+transform = Transform( 1, -2.84217e-14, 1.12515e-10, 1.12515e-10, 0.000345306, -1, -2.84217e-14, 1, 0.000345306, 0, 0.795567, 0 )
 layers = 1
 material_override = null
 cast_shadow = 1
@@ -74,6 +75,6 @@ lod_max_hysteresis = 0.0
 mesh = SubResource( 2 )
 skeleton = NodePath("..")
 material/0 = null
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Geometry", "Pause", "Transform", "Visibility", "material" ]
 
 
