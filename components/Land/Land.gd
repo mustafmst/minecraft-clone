@@ -2,9 +2,9 @@ extends Node
 
 # Scenes and Objects
 const Block = preload("res://components/Block/Block.tscn")
-const Chunk = preload("res://components/Land/Chunk.tscn")
-
-const mask = [
+var Chunk = preload("res://components/Land/Chunk.tscn").instance()
+const MAP_SIZE = Vector2(300,300)
+const MASK = [
     [1,1,1],
     [1,3,1],
     [1,1,1]
@@ -14,18 +14,14 @@ const mask = [
 var mapGenerator
 var ActiveChunk = null
 var firstChunk
-var thread = null
+var chunks_table = []
 
 func _ready():
     mapGenerator = get_node("MapGenerator")
-    mapGenerator.generate_map(Vector2(200,200),6,2,mask)
-    
-    firstChunk = Chunk.instance().create_new(self, null, null, null, Vector2(0,0))
+    mapGenerator.generate_map(MAP_SIZE,6,2,MASK)
+    self.create_chunks_table()
+    firstChunk = Chunk.create_new(self, Vector2(0,0), get_tab_pos_for_zero())
     self.set_active_chunk(firstChunk)
-    for i in range(ActiveChunk.neighourChunks.size()):
-        for j in range(ActiveChunk.neighourChunks[i].size()):
-            var c = ActiveChunk.neighourChunks[i][j]
-            print(c.get_2d_pos())
     pass
 
 
@@ -35,12 +31,21 @@ func _process(delta):
     if nearestChunk != ActiveChunk:
         var lastChunk = ActiveChunk
         ActiveChunk = null
-#        if thread != null && thread.is_active():
-#            thread.wait_to_finish()
-#        thread = Thread.new()
-#        thread.start(self, "change_chunk", [nearestChunk, lastChunk])
         change_chunk([nearestChunk,lastChunk])
     pass
+    
+    
+func create_chunks_table():
+    var x = int(MAP_SIZE.x / Chunk.ChunkSize)
+    var y = int(MAP_SIZE.y / Chunk.ChunkSize)
+    chunks_table = []
+    for i in range(x+2):
+        var tab = []
+        for j in range(y+2):
+            tab.append(null)
+        chunks_table.append(tab)
+    pass
+
     
 func change_chunk(chunks):
     set_unactive_chunk(chunks[1])
@@ -48,13 +53,24 @@ func change_chunk(chunks):
     pass
     
 
+func get_tab_pos_for_zero():
+    var x = int(chunks_table.size()/2)
+    var y = int(chunks_table[0].size()/2)
+    return Vector2(x,y);
+    
+
+func add_chunk_to_tab(chunk):
+    if chunk.tab_pos.x <= 1 || chunk.tab_pos.x >= chunks_table.size()-2 || chunk.tab_pos.y <= 1 || chunk.tab_pos.y >= chunks_table[0].size()-2:
+        chunk.set_as_boarder()
+    chunks_table[chunk.tab_pos.x][chunk.tab_pos.y] = chunk
+    
 
 func get_nearest_chunk(pos):
     var nearestChunk = ActiveChunk
     var distance = pos.distance_to(nearestChunk.get_2d_pos())
-    for i in range(ActiveChunk.neighourChunks.size()):
-        for j in range(ActiveChunk.neighourChunks[i].size()):
-            var c = ActiveChunk.neighourChunks[i][j]
+    for i in range(ActiveChunk.tab_pos.x-1,ActiveChunk.tab_pos.x+2):
+        for j in range(ActiveChunk.tab_pos.y-1,ActiveChunk.tab_pos.y+2):
+            var c = chunks_table[i][j]
             if c != null:
                 var newDistance = pos.distance_to(c.get_2d_pos())
                 if  newDistance < distance :
@@ -71,7 +87,5 @@ func set_unactive_chunk(chunk):
 func set_active_chunk(chunk):
     ActiveChunk = chunk
     chunk.activate()
-    chunk.create_neighbours()
-    chunk.update_relations()
     pass
 
