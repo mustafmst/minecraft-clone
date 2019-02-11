@@ -1,10 +1,10 @@
-extends Node
-
-const size = 1
+extends StaticBody
 
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
+
+onready var parent = get_parent()
 
 func _ready():
     # Called when the node is added to the scene for the first time.
@@ -16,7 +16,9 @@ func _ready():
 #    # Update game logic here.
 #    pass
 
-func add_block(direction):
-    var parent = get_parent()
-    if parent.has_method('add_block'):
-        parent.add_block(get_translation(), direction)
+
+func do_primary(collition_normal, collition_point):
+    parent.queue_free()
+
+func do_secondary(collition_normal, collition_point):
+    parent.add_block(collition_normal);
