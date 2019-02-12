@@ -1,10 +1,10 @@
-extends Node
-
-const size = 1
+extends Spatial
 
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
+
+var Block = preload("res://components/Block/Block.tscn")
 
 func _ready():
     # Called when the node is added to the scene for the first time.
@@ -16,7 +16,7 @@ func _ready():
 #    # Update game logic here.
 #    pass
 
-func add_block(direction):
-    var parent = get_parent()
-    if parent.has_method('add_block'):
-        parent.add_block(get_translation(), direction)
+func add_block(position, direction):
+    var new_block = Block.instance()
+    new_block.translate(position + direction)
+    add_child(new_block)
