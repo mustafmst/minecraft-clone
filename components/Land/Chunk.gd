@@ -86,7 +86,8 @@ func deactivate():
 ## Block API
 
 func add_block(translation, direction):
-    put_one_block(translation + direction)
+    var new_pos = translation + direction
+    put_one_block(Vector3(int(new_pos.x),int(new_pos.y),int(new_pos.z)))
     pass
     
     
