@@ -20,3 +20,8 @@ func add_block(direction):
     var parent = get_parent()
     if parent.has_method('add_block'):
         parent.add_block(get_translation(), direction)
+        
+func remove_block():
+    var parent = get_parent()
+    if parent.has_method('remove_block'):
+        parent.remove_block(self)
