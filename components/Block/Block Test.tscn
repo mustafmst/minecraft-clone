@@ -1,15 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://components/Land/Land.tscn" type="PackedScene" id=1]
-[ext_resource path="res://components/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://components/Block/Block.tscn" type="PackedScene" id=1]
 
-[node name="World" type="Node" index="0"]
+[node name="Block Test" type="Node"]
 
-[node name="Land" parent="." index="0" instance=ExtResource( 1 )]
+[node name="Block" parent="." index="0" instance=ExtResource( 1 )]
 
 [node name="DirectionalLight" type="DirectionalLight" parent="." index="1"]
 
-transform = Transform( 1, 0, 0, 0, 0.622806, 0.782376, 0, -0.782376, 0.622806, 0, 1.48878, 0 )
+transform = Transform( 0.815569, -0.467571, 0.340918, 0, 0.589151, 0.808023, -0.57866, -0.658998, 0.480493, 5.82111, 4.25671, 0.544497 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0
@@ -33,9 +32,5 @@ directional_shadow_normal_bias = 0.8
 directional_shadow_bias_split_scale = 0.25
 directional_shadow_depth_range = 0
 directional_shadow_max_distance = 200.0
-
-[node name="Player" parent="." index="2" instance=ExtResource( 2 )]
-
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0 )
 
 
