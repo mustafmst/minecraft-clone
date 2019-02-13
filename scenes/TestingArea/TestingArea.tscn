@@ -226,7 +226,7 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Glow", "Glow/levels" ]
 
-[node name="Testing_Area" type="Spatial" index="0"]
+[node name="Testing_Area" type="Spatial"]
 
 [node name="Box" type="Spatial" parent="." index="0"]
 

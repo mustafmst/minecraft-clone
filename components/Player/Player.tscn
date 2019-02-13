@@ -1,15 +1,15 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://components/Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://components/Player/RayCast.gd" type="Script" id=2]
-[ext_resource path="res://components/Player/crosshair.png" type="Texture" id=3]
-[ext_resource path="res://components/Player/Steve_RLegMesh.mesh" type="ArrayMesh" id=4]
-[ext_resource path="res://components/Player/steve.png" type="Texture" id=5]
-[ext_resource path="res://components/Player/Steve_RArmMesh.mesh" type="ArrayMesh" id=6]
-[ext_resource path="res://components/Player/Steve_BodyMesh.mesh" type="ArrayMesh" id=7]
-[ext_resource path="res://components/Player/Steve_HeadMesh.mesh" type="ArrayMesh" id=8]
-[ext_resource path="res://components/Player/Steve_LArmMesh.mesh" type="ArrayMesh" id=9]
-[ext_resource path="res://components/Player/Steve_LLegMesh.mesh" type="ArrayMesh" id=10]
+[ext_resource path="res://components/Player/Steve_RLegMesh.mesh" type="ArrayMesh" id=2]
+[ext_resource path="res://components/Player/steve.png" type="Texture" id=3]
+[ext_resource path="res://components/Player/Steve_RArmMesh.mesh" type="ArrayMesh" id=4]
+[ext_resource path="res://components/Player/Steve_BodyMesh.mesh" type="ArrayMesh" id=5]
+[ext_resource path="res://components/Player/Steve_HeadMesh.mesh" type="ArrayMesh" id=6]
+[ext_resource path="res://components/Player/Steve_LArmMesh.mesh" type="ArrayMesh" id=7]
+[ext_resource path="res://components/Player/Steve_LLegMesh.mesh" type="ArrayMesh" id=8]
+[ext_resource path="res://components/Player/RayCast.gd" type="Script" id=9]
+[ext_resource path="res://components/Player/crosshair.png" type="Texture" id=10]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -40,7 +40,7 @@ params_billboard_mode = 0
 params_grow = false
 params_use_alpha_scissor = false
 albedo_color = Color( 1, 1, 1, 1 )
-albedo_texture = ExtResource( 5 )
+albedo_texture = ExtResource( 3 )
 metallic = 0.0
 metallic_specular = 0.5
 metallic_texture_channel = 0
@@ -93,7 +93,7 @@ params_billboard_mode = 0
 params_grow = false
 params_use_alpha_scissor = false
 albedo_color = Color( 1, 1, 1, 1 )
-albedo_texture = ExtResource( 5 )
+albedo_texture = ExtResource( 3 )
 metallic = 0.0
 metallic_specular = 0.5
 metallic_texture_channel = 0
@@ -146,7 +146,7 @@ params_billboard_mode = 0
 params_grow = false
 params_use_alpha_scissor = false
 albedo_color = Color( 1, 1, 1, 1 )
-albedo_texture = ExtResource( 5 )
+albedo_texture = ExtResource( 3 )
 metallic = 0.0
 metallic_specular = 0.5
 metallic_texture_channel = 0
@@ -199,7 +199,7 @@ params_billboard_mode = 0
 params_grow = false
 params_use_alpha_scissor = false
 albedo_color = Color( 1, 1, 1, 1 )
-albedo_texture = ExtResource( 5 )
+albedo_texture = ExtResource( 3 )
 metallic = 0.0
 metallic_specular = 0.5
 metallic_texture_channel = 0
@@ -252,7 +252,7 @@ params_billboard_mode = 0
 params_grow = false
 params_use_alpha_scissor = false
 albedo_color = Color( 1, 1, 1, 1 )
-albedo_texture = ExtResource( 5 )
+albedo_texture = ExtResource( 3 )
 metallic = 0.0
 metallic_specular = 0.5
 metallic_texture_channel = 0
@@ -305,7 +305,7 @@ params_billboard_mode = 0
 params_grow = false
 params_use_alpha_scissor = false
 albedo_color = Color( 1, 1, 1, 1 )
-albedo_texture = ExtResource( 5 )
+albedo_texture = ExtResource( 3 )
 metallic = 0.0
 metallic_specular = 0.5
 metallic_texture_channel = 0
@@ -359,15 +359,17 @@ _sections_unfolded = [ "Pause", "Transform", "Visibility" ]
 
 [node name="RotationHelper" type="Spatial" parent="." index="1"]
 
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="Model" type="Spatial" parent="RotationHelper" index="0"]
 
-transform = Transform( 0.999998, 0.00054878, -0.00180294, -0.000554299, 0.999995, -0.00306239, 0.00180125, 0.00306338, 0.999994, 0, 0, 0 )
+transform = Transform( 0.999998, 0.00054878, -0.00180294, -0.000554299, 0.999995, -0.00306239, 0.00180125, 0.00306338, 0.999994, 0, -1.4, 0 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Character" type="Spatial" parent="RotationHelper/Model" index="0"]
 
+editor/display_folded = true
 transform = Transform( 0.195298, 5.60476e-11, 8.73115e-11, 7.75344e-11, 0.195298, 1.16415e-10, -2.91038e-11, 5.82077e-11, 0.195298, 0, 0, 0 )
 _sections_unfolded = [ "Transform" ]
 
@@ -383,7 +385,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = ExtResource( 4 )
+mesh = ExtResource( 2 )
 skeleton = NodePath("..")
 material/0 = SubResource( 2 )
 _sections_unfolded = [ "Transform", "material" ]
@@ -400,7 +402,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = ExtResource( 6 )
+mesh = ExtResource( 4 )
 skeleton = NodePath("..")
 material/0 = SubResource( 3 )
 _sections_unfolded = [ "material" ]
@@ -417,7 +419,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = ExtResource( 7 )
+mesh = ExtResource( 5 )
 skeleton = NodePath("..")
 material/0 = SubResource( 4 )
 _sections_unfolded = [ "material" ]
@@ -434,7 +436,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = ExtResource( 8 )
+mesh = ExtResource( 6 )
 skeleton = NodePath("..")
 material/0 = SubResource( 5 )
 _sections_unfolded = [ "material" ]
@@ -451,7 +453,7 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = ExtResource( 9 )
+mesh = ExtResource( 7 )
 skeleton = NodePath("..")
 material/0 = SubResource( 6 )
 _sections_unfolded = [ "Transform", "material" ]
@@ -468,14 +470,14 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = ExtResource( 10 )
+mesh = ExtResource( 8 )
 skeleton = NodePath("..")
 material/0 = SubResource( 7 )
 _sections_unfolded = [ "material" ]
 
 [node name="Camera" type="Camera" parent="RotationHelper" index="1"]
 
-transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0, 1.43851, 0.117954 )
+transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0, 0, 0.117954 )
 keep_aspect = 1
 cull_mask = 1048575
 environment = null
@@ -496,25 +498,8 @@ enabled = false
 exclude_parent = true
 cast_to = Vector3( 0, 0, -4 )
 collision_mask = 1
-script = ExtResource( 2 )
+script = ExtResource( 9 )
 _sections_unfolded = [ "Transform", "Visibility" ]
-
-[node name="MeshInstance" type="MeshInstance" parent="RotationHelper" index="1"]
-
-transform = Transform( 1, -2.84217e-14, 1.12515e-10, 1.12515e-10, 0.000345306, -1, -2.84217e-14, 1, 0.000345306, 0, 0.795567, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 2 )
-skeleton = NodePath("..")
-material/0 = null
-_sections_unfolded = [ "Geometry", "Pause", "Transform", "Visibility", "material" ]
 
 [node name="HUD" type="Control" parent="." index="2"]
 
@@ -565,7 +550,7 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 3 )
+texture = ExtResource( 10 )
 stretch_mode = 4
 _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Pause", "Rect", "Size Flags", "Theme", "Visibility" ]
 
