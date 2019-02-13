@@ -5,6 +5,7 @@
 [node name="Chunk" type="Spatial"]
 
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 maxBlockHeight = 4
 
 

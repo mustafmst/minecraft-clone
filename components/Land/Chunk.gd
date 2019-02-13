@@ -29,11 +29,15 @@ func put_blocks(pos):
     var chunkPos = self.translation
     var blockPos = Vector2(chunkPos.x+pos.x-ChunkSize/2, chunkPos.z+pos.y-ChunkSize/2)
     for h in range(get_parent().mapGenerator.get_height(blockPos)):
-        var item = get_parent().Block.instance()
-        item.translate(Vector3(blockPos.x,h,blockPos.y))
-        add_child(item)
+        put_one_block(Vector3(blockPos.x,h,blockPos.y))
     pass
 
+
+func put_one_block(pos):
+    var item = get_parent().Block.instance()
+    item.translate(pos)
+    add_child(item)
+    
 
 # Helper methods
 func get_2d_pos():
@@ -79,3 +83,14 @@ func deactivate():
     self.hide()
     pass
 
+## Block API
+
+func add_block(translation, direction):
+    var new_pos = translation + direction
+    put_one_block(Vector3(int(new_pos.x),int(new_pos.y),int(new_pos.z)))
+    pass
+    
+    
+func remove_block(block):
+    block.queue_free()
+    pass
