@@ -7,4 +7,3 @@ func _ready():
 func on_pressed():
     #save the game accordingly
     pass
-    

@@ -7,4 +7,3 @@ func _ready():
 func on_pressed():
     #load the game accordingly
     pass
-    
