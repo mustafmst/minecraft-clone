@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/minecraft-bg.jpg-1113afcbb079149e91e2f079fa95749e.stex"
+path="res://.import/minecraft-bg.jpg-e2e69bdf48b91ee74c2a7ed4614871bd.stex"
 
 [deps]
 
-source_file="res://components/Menu/minecraft-bg.jpg"
-dest_files=[ "res://.import/minecraft-bg.jpg-1113afcbb079149e91e2f079fa95749e.stex" ]
+source_file="res://scenes/Menu/minecraft-bg.jpg"
+dest_files=[ "res://.import/minecraft-bg.jpg-e2e69bdf48b91ee74c2a7ed4614871bd.stex" ]
 
 [params]
 

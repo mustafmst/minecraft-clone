@@ -1,25 +1,20 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://components/Menu/Menu.gd" type="Script" id=1]
-[ext_resource path="res://components/Menu/minecraft-bg.jpg" type="Texture" id=2]
-[ext_resource path="res://components/Menu/StartButton.gd" type="Script" id=3]
-[ext_resource path="res://components/Menu/BackButton.gd" type="Script" id=4]
-[ext_resource path="res://components/Menu/SaveButton.gd" type="Script" id=5]
-[ext_resource path="res://components/Menu/LoadButton.gd" type="Script" id=6]
-[ext_resource path="res://components/Menu/QuitButton.gd" type="Script" id=7]
-
-[sub_resource type="DynamicFontData" id=1]
-
-hinting = 2
-font_path = "res://components/Menu/Pixel-Miners.otf"
-_sections_unfolded = [ "Resource" ]
+[ext_resource path="res://scenes/Menu/Menu.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Menu/minecraft-bg.jpg" type="Texture" id=2]
+[ext_resource path="res://scenes/Menu/pixel-miners.tres" type="DynamicFontData" id=3]
+[ext_resource path="res://scenes/Menu/StartButton.gd" type="Script" id=4]
+[ext_resource path="res://scenes/Menu/BackButton.gd" type="Script" id=5]
+[ext_resource path="res://scenes/Menu/SaveButton.gd" type="Script" id=6]
+[ext_resource path="res://scenes/Menu/LoadButton.gd" type="Script" id=7]
+[ext_resource path="res://scenes/Menu/QuitButton.gd" type="Script" id=8]
 
 [sub_resource type="DynamicFont" id=2]
 
 size = 50
 use_mipmaps = false
 use_filter = false
-font_data = SubResource( 1 )
+font_data = ExtResource( 3 )
 _sections_unfolded = [ "Font", "Font/fallback", "Settings" ]
 
 [node name="Menu" type="Node" index="0"]
@@ -145,7 +140,7 @@ text = "S T A R T"
 flat = true
 align = 1
 items = [  ]
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_fonts", "custom_styles" ]
 
 [node name="BackButton" type="MenuButton" parent="MarginContainer/MenuContainer" index="1"]
@@ -173,7 +168,7 @@ text = "Back to game"
 flat = true
 align = 1
 items = [  ]
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_fonts", "custom_styles" ]
 
 [node name="SaveButton" type="MenuButton" parent="MarginContainer/MenuContainer" index="2"]
@@ -201,7 +196,7 @@ text = "Save"
 flat = true
 align = 1
 items = [  ]
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "custom_fonts" ]
 
 [node name="LoadButton" type="MenuButton" parent="MarginContainer/MenuContainer" index="3"]
@@ -229,7 +224,7 @@ text = "Load"
 flat = true
 align = 1
 items = [  ]
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "custom_fonts" ]
 
 [node name="QuitButton" type="MenuButton" parent="MarginContainer/MenuContainer" index="4"]
@@ -257,7 +252,7 @@ text = "Quit"
 flat = true
 align = 1
 items = [  ]
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 _sections_unfolded = [ "custom_fonts" ]
 
 
