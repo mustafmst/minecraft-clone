@@ -1,5 +1,7 @@
 extends KinematicBody
 
+# The 3D model is from https://clara.io/view/1edd3bc9-ebaf-4bc2-b994-4393ed3ce6d8/image
+
 # https://minecraft.gamepedia.com/Transportation
 # There is no 'real' physisc in minecraft
 # https://www.minecraftforum.net/forums/minecraft-java-edition/discussion/132990-rebuttal-acceleration-of-gravity-in-minecraft

@@ -2,13 +2,13 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/crosshair.png-ee5082a060285996dfe1c767d90b089d.s3tc.stex"
-path.etc2="res://.import/crosshair.png-ee5082a060285996dfe1c767d90b089d.etc2.stex"
+path.s3tc="res://.import/steve.png-c68dbbb4d0044c564db5f83390b5f505.s3tc.stex"
+path.etc2="res://.import/steve.png-c68dbbb4d0044c564db5f83390b5f505.etc2.stex"
 
 [deps]
 
-source_file="res://components/Player/crosshair.png"
-dest_files=[ "res://.import/crosshair.png-ee5082a060285996dfe1c767d90b089d.s3tc.stex", "res://.import/crosshair.png-ee5082a060285996dfe1c767d90b089d.etc2.stex" ]
+source_file="res://components/Player/steve.png"
+dest_files=[ "res://.import/steve.png-c68dbbb4d0044c564db5f83390b5f505.s3tc.stex", "res://.import/steve.png-c68dbbb4d0044c564db5f83390b5f505.etc2.stex" ]
 
 [params]
 
