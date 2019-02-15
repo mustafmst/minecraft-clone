@@ -21,8 +21,12 @@ var dir = Vector3()
 const DEACCEL= 16
 const MAX_SLOPE_ANGLE = 40
 
+enum ANIM_STATES { IDLE, WALKING }
+var anim_state = IDLE
+
 onready var camera = $RotationHelper/Camera
 onready var rotation_helper = $RotationHelper
+onready var animation_player = $RotationHelper/Model/AnimationPlayer
 
 var MOUSE_SENSITIVITY = 0.05
 
@@ -33,6 +37,8 @@ var MOUSE_SENSITIVITY = 0.05
 func _ready():
     # Cature the mouse cursor in game window 
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+    animation_player.connect("animation_finished", self, "on_anim_finished")
+    anim_state = ANIM_STATES.IDLE
 
 func _physics_process(delta):
     process_input(delta)
@@ -113,6 +119,9 @@ func process_movement(delta):
     vel.x = hvel.x
     vel.z = hvel.z
     vel = move_and_slide(vel,Vector3(0,1,0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
+    if anim_state != ANIM_STATES.WALKING and vel.length_squared() > 0:
+        anim_state = ANIM_STATES.WALKING
+        animation_player.queue("Walking")
 
 func _input(event):
     if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -122,3 +131,9 @@ func _input(event):
         var camera_rot = rotation_helper.rotation_degrees
         camera_rot.x = clamp(camera_rot.x, -70, 70)
         rotation_helper.rotation_degrees = camera_rot
+
+func on_anim_finished(anim_name):
+    if vel.length_squared() > 0:
+        animation_player.play("Walking")
+    else:
+        anim_state = ANIM_STATES.IDLE
