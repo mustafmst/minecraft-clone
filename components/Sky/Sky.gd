@@ -1,12 +1,6 @@
 extends Spatial
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-
 func _ready():
-    # Called when the node is added to the scene for the first time.
-    # Initialization here
     pass
 
 func _process(delta):
@@ -15,4 +9,3 @@ func _process(delta):
     var player = get_parent().get_node("Player").translation
     if player != null:
         translation = Vector3(player.x, 0, player.z)
-    pass
