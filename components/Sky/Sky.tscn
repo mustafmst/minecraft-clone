@@ -185,7 +185,7 @@ night_brightness_speed_factor = 2.5
 
 [node name="sun" type="DirectionalLight" parent="SkyObjectsMover" index="0"]
 
-transform = Transform( -0.0119718, 0, -0.999928, 0, 1, 0, 0.999928, 0, -0.0119718, -47, 0, 0 )
+transform = Transform( 0, 0, -1, 0, 1, 0, 1, 0, 0, -47, 0, 0 )
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 16.0
@@ -247,7 +247,7 @@ _sections_unfolded = [ "Animation", "Flags", "Geometry", "LOD", "Region", "Trans
 transform = Transform( 1, 0, -1.86265e-09, 0, 1, 0, 1.86265e-09, 0, 1, -1.49012e-08, 0, 0 )
 layers = 1
 material_override = null
-cast_shadow = 1
+cast_shadow = 0
 extra_cull_margin = 0.0
 use_in_baked_light = false
 lod_min_distance = 0.0
@@ -323,7 +323,7 @@ _sections_unfolded = [ "Animation", "Flags", "Geometry", "LOD", "Region", "Trans
 transform = Transform( 1, 0, -2.79397e-09, 0, 1, 0, 2.79397e-09, 0, 1, 0, 0, 0 )
 layers = 1
 material_override = null
-cast_shadow = 1
+cast_shadow = 0
 extra_cull_margin = 0.0
 use_in_baked_light = false
 lod_min_distance = 0.0
